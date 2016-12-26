@@ -17,10 +17,11 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
 
-    private static final int REQUEST_PERMISSION_ON_READ_FILE = 201;
+    private static final int REQUEST_PERMISSION_LOCATION = 201;
 
 
-    private boolean isTrackengNoaw;
+
+    private boolean isTrackingNow;
     private FloatingActionButton floatingActionButton;
 
     @Override
@@ -35,7 +36,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, REQUEST_PERMISSION_ON_READ_FILE);
+            ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,
+                    Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_PERMISSION_LOCATION);
+
+
         }
 
 
@@ -49,21 +53,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        isTrackengNoaw = !isTrackengNoaw;
-        floatingActionButton.setImageResource(isTrackengNoaw ? R.drawable.ic_stop_white_24dp : R.drawable.ic_play_arrow_white_24dp);
+        isTrackingNow = !isTrackingNow;
+        floatingActionButton.setImageResource(isTrackingNow ? R.drawable.ic_stop_white_24dp : R.drawable.ic_play_arrow_white_24dp);
         Toast.makeText(this, "Button presed", Toast.LENGTH_SHORT).show();
 
     }
 
 
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == REQUEST_PERMISSION_ON_READ_FILE) {
+        if (requestCode == REQUEST_PERMISSION_LOCATION) {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(this, "Get read location permission", Toast.LENGTH_LONG).show();
                 finish();
+            }else {
+             onPermissionResiv();
             }
+
         }
+    }
+    private void onPermissionResiv(){
+        Toast.makeText(this, "Permission grandet", Toast.LENGTH_SHORT).show();
+
     }
 }

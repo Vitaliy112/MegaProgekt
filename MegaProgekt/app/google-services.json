@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "814616991704",
+    "project_id": "my-project1-153718"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:814616991704:android:b1300d4e39fea0ed",
+        "android_client_info": {
+          "package_name": "com.solonenko.vitaliy.megaprogekt123"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "814616991704-6q08t6bo8k8dh5vregocnfb4c77skpc0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.solonenko.vitaliy.megaprogekt123",
+            "certificate_hash": "3C508C662B0002C17753BDBC9B4E8D40AC8618D7"
+          }
+        },
+        {
+          "client_id": "814616991704-iglvrht9koigumbbb66gup404024anao.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyApyVILufD_xZPOI1FJ5ZmruSQY-4Z3knU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

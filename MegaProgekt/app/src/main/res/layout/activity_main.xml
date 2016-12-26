@@ -8,6 +8,7 @@
     tools:context="com.solonenko.vitaliy.megaprogekt123.MainActivity">
 
     <android.support.design.widget.AppBarLayout
+        android:id="@+id/bar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -21,6 +22,15 @@
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
 
+
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_below="@+id/bar_layout"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/map"
+        tools:context=".MapsActivity"
+        android:name="com.google.android.gms.maps.SupportMapFragment" />
     <android.support.design.widget.FloatingActionButton
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
@@ -28,4 +38,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_play_arrow_white_24dp"/>
+
+
 </RelativeLayout>
