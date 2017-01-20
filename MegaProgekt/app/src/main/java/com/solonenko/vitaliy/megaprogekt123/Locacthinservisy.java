@@ -41,6 +41,12 @@ public class Locacthinservisy  extends Service{
                 locationListener);
 
     }
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        return START_STICKY;
+    }
+
     private LocationListener locationListener = new LocationListener() {
 
         @Override
