@@ -18,6 +18,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
+
+        <service android:name=".Locacthinservisy">
+
+        </service>
+
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCJPfcc_xjPuH38RS_mmxoy3lNj_LPyUVo"/>
