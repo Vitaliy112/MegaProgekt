@@ -15,12 +15,17 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
 
     private static final String TAG = "MainActivity";
 
     private static final int REQUEST_PERMISSION_LOCATION = 201;
+
 
     private boolean isTrackingNow;
     private FloatingActionButton floatingActionButton;
@@ -44,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         }else {
             onPermissionResiv();
+
         }
 
 
@@ -80,6 +86,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void onPermissionResiv() {
 
+
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
@@ -92,8 +99,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         Intent intent = new Intent(this, Locacthinservisy.class );
          startService(intent);
-
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+        mapFragment.getMapAsync(new OnMapReadyCallback() {
+            @SuppressWarnings("MissingPermission")
+            @Override
+            public void onMapReady(GoogleMap googleMap) {
+                googleMap.setMyLocationEnabled(true);
+            }
+        });
     }
+
 
 
 

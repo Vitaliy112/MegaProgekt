@@ -51,6 +51,7 @@ public class Locacthinservisy  extends Service{
 
         @Override
         public void onLocationChanged(Location location) {
+
             //   showLocation(location);
             Log.d(TAG, "onLocationChanged() called with: location = [" + location + "]");
         }
