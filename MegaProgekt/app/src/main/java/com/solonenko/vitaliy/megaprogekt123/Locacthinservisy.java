@@ -18,11 +18,14 @@ import com.google.android.gms.maps.model.LatLng;
 
 public class Locacthinservisy extends Service {
 
+    public static final String ACTION_START_TRACKING = "Start";
+    public static final String ACTION_SOP_TRACKING = "Stop";
 
     private LocationManager locationManager;
 
 
     private static final String TAG = "Locacthinservisy";
+
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
@@ -35,18 +38,22 @@ public class Locacthinservisy extends Service {
         Log.d(TAG, "onCreate() called");
 
         super.onCreate();
-        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
-        locationManager.requestLocationUpdates(
-                LocationManager.GPS_PROVIDER, 1000 * 10, 1,
-                locationListener);
-        locationManager.requestLocationUpdates(
-                LocationManager.NETWORK_PROVIDER, 1000 * 10, 1,
-                locationListener);
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        if (intent != null) {
+            String action = intent.getAction();
+            if (action.equals(ACTION_START_TRACKING)) {
+                startTreckingLocation();
+
+            } else if (action.equals(ACTION_SOP_TRACKING)) {
+                stopSelf();
+            }
+
+        }
+
         return START_STICKY;
     }
 
@@ -84,5 +91,17 @@ public class Locacthinservisy extends Service {
             }
         }
     };
+
+    @SuppressWarnings("MissingPermission")
+    public void startTreckingLocation(){
+        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+
+        locationManager.requestLocationUpdates(
+                LocationManager.GPS_PROVIDER, 1000 * 10, 1,
+                locationListener);
+        locationManager.requestLocationUpdates(
+                LocationManager.NETWORK_PROVIDER, 1000 * 10, 1,
+                locationListener);
+    }
 
 }

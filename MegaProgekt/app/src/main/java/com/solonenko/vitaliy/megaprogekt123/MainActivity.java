@@ -74,6 +74,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // map.addMarker(new MarkerOptions().position(new LatLng(0,0)).title(" Hello "));
         if (isPermissenGranted()) {
             Intent intent = new Intent(this, Locacthinservisy.class);
+            intent.setAction(isTrackingNow ? Locacthinservisy.ACTION_START_TRACKING : Locacthinservisy.ACTION_SOP_TRACKING);
             startService(intent);
             Log.d(TAG, "onClick: ");
         }
