@@ -11,7 +11,7 @@ import java.util.List;
 public class LockationStorejeImpl implements LockationStoraje {
 
     private static final String TAG = "LockationStoregImp";
-
+     private AbdeitListener abdeitListener;
     private List<Location> locations ;
 
     public LockationStorejeImpl() {
@@ -21,8 +21,15 @@ public class LockationStorejeImpl implements LockationStoraje {
 
 
     @Override
+    public void setListener(@NonNull AbdeitListener listener) {
+        abdeitListener = listener;
+
+    }
+
+    @Override
     public void addLockation(@NonNull Location location) {
         locations.add(location);
+        abdeitListener.onLockationChenged(locations);
         Log.d(TAG, "addLockation() called with: location = [" + location + "]");
 
     }

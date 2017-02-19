@@ -3,6 +3,7 @@ package com.solonenko.vitaliy.megaprogekt123;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -20,6 +21,8 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.Marker;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -115,6 +118,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onMapReady(GoogleMap googleMap) {
                 googleMap.setMyLocationEnabled(true);
+
+                ((MyAplication) getApplication()).getLockationStoraje().setListener(new LockationStoraje.AbdeitListener() {
+                    @Override
+                    public void onLockationChenged(List<Location> locations) {
+
+                    }
+                });
+
             }
         });
     }
