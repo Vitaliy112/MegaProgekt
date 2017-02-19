@@ -3,4 +3,6 @@
     <string name="show_track">Show Track</string>
     <string name="provider_gps">GPS</string>
     <string name="provider_network">Network</string>
+
+
 </resources>

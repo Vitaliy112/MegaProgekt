@@ -10,13 +10,17 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+import com.google.android.gms.maps.model.LatLng;
+
 /**
  * Created by vitaliy on 20.01.2017.
  */
 
-public class Locacthinservisy  extends Service{
+public class Locacthinservisy extends Service {
+
 
     private LocationManager locationManager;
+
 
     private static final String TAG = "Locacthinservisy";
     @Nullable
@@ -28,9 +32,9 @@ public class Locacthinservisy  extends Service{
     @SuppressWarnings("MissingPermission")
     @Override
     public void onCreate() {
+        Log.d(TAG, "onCreate() called");
 
         super.onCreate();
-
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
         locationManager.requestLocationUpdates(
@@ -39,7 +43,6 @@ public class Locacthinservisy  extends Service{
         locationManager.requestLocationUpdates(
                 LocationManager.NETWORK_PROVIDER, 1000 * 10, 1,
                 locationListener);
-
     }
 
     @Override
@@ -51,6 +54,8 @@ public class Locacthinservisy  extends Service{
 
         @Override
         public void onLocationChanged(Location location) {
+            LatLng coordinaty = new LatLng(location.getLatitude(), location.getLongitude());
+            //map.addMarker(new MarkerOptions().position(new LatLng(0, 0))).setTitle(" Hello world");
 
             //   showLocation(location);
             Log.d(TAG, "onLocationChanged() called with: location = [" + location + "]");

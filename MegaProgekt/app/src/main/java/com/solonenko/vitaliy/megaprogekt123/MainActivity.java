@@ -10,6 +10,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.Marker;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -25,6 +27,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static final String TAG = "MainActivity";
 
     private static final int REQUEST_PERMISSION_LOCATION = 201;
+    SupportMapFragment mapFragment;
+    GoogleMap map;
+    Marker marker;
 
 
     private boolean isTrackingNow;
@@ -59,6 +64,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         floatingActionButton = (FloatingActionButton) findViewById(R.id.btnStart);
         floatingActionButton.setOnClickListener(this);
+
     }
 
     @Override
@@ -66,6 +72,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         isTrackingNow = !isTrackingNow;
         floatingActionButton.setImageResource(isTrackingNow ? R.drawable.ic_stop_white_24dp : R.drawable.ic_play_arrow_white_24dp);
         Toast.makeText(this, "Button presed", Toast.LENGTH_SHORT).show();
+         // map.addMarker(new MarkerOptions().position(new LatLng(0,0)).title(" Hello "));
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            Intent intent = new Intent(this, Locacthinservisy.class);
+            startService(intent);
+            Log.d(TAG, "onClick: ");
+        }
 
     }
 
@@ -86,19 +98,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void onPermissionResiv() {
 
-
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
+//                ActivityCompat#requestPermissions
+//             here to request the missing permissions, and then overriding
+//               public void onRequestPermissionsResult(int requestCode, String[] permissions,
+//                                                      int[] grantResults)
+//             to handle the case where the user grants the permission. See the documentation
+//             for ActivityCompat#requestPermissions for more details.
             return;
         }
-        Intent intent = new Intent(this, Locacthinservisy.class );
-         startService(intent);
+
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(new OnMapReadyCallback() {
             @SuppressWarnings("MissingPermission")
