@@ -2,21 +2,36 @@ package com.solonenko.vitaliy.megaprogekt123;
 
 import android.location.Location;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by vitaliy on 19.02.2017.
- */
 
 public class LockationStorejeImpl implements LockationStoraje {
-    @Override
-    public void addLockation(@NonNull Location location) {
+
+    private static final String TAG = "LockationStoregImp";
+
+    private List<Location> locations ;
+
+    public LockationStorejeImpl() {
+  locations = new ArrayList<>();
 
     }
 
+
+    @Override
+    public void addLockation(@NonNull Location location) {
+        locations.add(location);
+        Log.d(TAG, "addLockation() called with: location = [" + location + "]");
+
+    }
+
+
+
     @Override
     public List<Location> getLockation() {
-        return null;
+
+        return locations;
     }
 }
