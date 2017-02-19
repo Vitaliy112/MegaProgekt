@@ -46,13 +46,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (!isPermissenGranted()) {
             ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,
                     Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_PERMISSION_LOCATION);
 
 
-
-        }else {
+        } else {
             onPermissionResiv();
 
         }
@@ -72,8 +71,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         isTrackingNow = !isTrackingNow;
         floatingActionButton.setImageResource(isTrackingNow ? R.drawable.ic_stop_white_24dp : R.drawable.ic_play_arrow_white_24dp);
         Toast.makeText(this, "Button presed", Toast.LENGTH_SHORT).show();
-         // map.addMarker(new MarkerOptions().position(new LatLng(0,0)).title(" Hello "));
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+        // map.addMarker(new MarkerOptions().position(new LatLng(0,0)).title(" Hello "));
+        if (isPermissenGranted()) {
             Intent intent = new Intent(this, Locacthinservisy.class);
             startService(intent);
             Log.d(TAG, "onClick: ");
@@ -86,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == REQUEST_PERMISSION_LOCATION) {
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            if (!isPermissenGranted()) {
                 Toast.makeText(this, "Get read location permission", Toast.LENGTH_LONG).show();
                 finish();
             } else {
@@ -98,7 +97,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void onPermissionResiv() {
 
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (!isPermissenGranted()) {
             // TODO: Consider calling
 //                ActivityCompat#requestPermissions
 //             here to request the missing permissions, and then overriding
@@ -119,8 +118,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
     }
 
+    public boolean isPermissenGranted() {
+
+        return ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED;
 
 
+    }
 
 
 }
