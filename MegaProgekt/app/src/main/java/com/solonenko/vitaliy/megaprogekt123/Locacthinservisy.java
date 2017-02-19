@@ -10,9 +10,6 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
-/**
- * Created by vitaliy on 20.01.2017.
- */
 
 public class Locacthinservisy extends Service {
 

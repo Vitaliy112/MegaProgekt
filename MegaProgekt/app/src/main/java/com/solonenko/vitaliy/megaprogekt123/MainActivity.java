@@ -3,6 +3,7 @@ package com.solonenko.vitaliy.megaprogekt123;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -20,7 +21,10 @@ import android.widget.Toast;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.util.List;
 
@@ -116,12 +120,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mapFragment.getMapAsync(new OnMapReadyCallback() {
             @SuppressWarnings("MissingPermission")
             @Override
-            public void onMapReady(GoogleMap googleMap) {
+            public void onMapReady(final GoogleMap googleMap) {
                 googleMap.setMyLocationEnabled(true);
 
                 ((MyAplication) getApplication()).getLockationStoraje().setListener(new LockationStoraje.AbdeitListener() {
                     @Override
                     public void onLockationChenged(List<Location> locations) {
+
+                        PolylineOptions rectOptions = new PolylineOptions();
+                        for (Location location : locations) {
+
+                            rectOptions.add(new LatLng(location.getLatitude(), (location.getLongitude())));
+
+
+
+                        }
+                        Polyline polyline = googleMap.addPolyline(rectOptions);
+                        polyline.setColor(Color.GREEN);
+
 
                     }
                 });
